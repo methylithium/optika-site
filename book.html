@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Адреса и контакты - Оптика 100% Уфа</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body class="bg-white text-gray-800">
+
+<!-- Header -->
+<header class="shadow-md sticky top-0 bg-white z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-4">
+        <img src="pic/logo.png" alt="Логотип" class="h-20 w-50">
+      </div>
+      <nav class="hidden md:flex space-x-6 items-center">
+        <a href="/" class="hover:text-red-800">Главная страница</a>
+        <a href="about.html" class="hover:text-red-800">О нас</a>
+        <a href="service.html" class="hover:text-red-800">Услуги</a>
+        <a href="contacts.html" class="hover:text-red-800">Адреса и контакты</a>
+      </nav>
+      <div class="hidden md:flex items-center space-x-4">
+        <span class="text-sm">+7 (999) 123-45-67</span>
+        <a href="#" class="bg-red-800 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Записаться на прием</a>
+      </div>
+  
+      <!-- Мобильное меню -->
+      <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+             viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+    <div x-show="mobileMenuOpen" class="md:hidden bg-white shadow-md px-4 py-4 space-y-2">
+      <a href="about.html" class="block hover:text-red-800">О нас</a>
+      <a href="service.html" class="block hover:text-red-800">Услуги</a>
+      <a href="contacts.html" class="block hover:text-red-800">Адреса и контакты</a>
+      <a href="tel:79991314497" class="block text-red-800 font-semibold mt-2">+7 (999) 123-45-67</a>
+      <a href="#" class="block bg--red-800 text-white px-4 py-2 rounded hover:bg-red-900 text-center mt-2">Записаться на приём</a>
+    </div>
+  </header>
+
+<section class="py-16 bg-gray-50">
+    <div class="max-w-md mx-auto px-4 bg-white p-6 rounded shadow">
+      <h1 class="text-2xl font-bold mb-6 text-center">Запись на приём</h1>
+      <form class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium">Имя</label>
+          <input type="text" class="w-full border px-3 py-2 rounded" required />
+        </div>
+        <div>
+          <label class="block text-sm font-medium">Телефон</label>
+          <input type="tel" class="w-full border px-3 py-2 rounded" required />
+        </div>
+        <div>
+          <label class="block text-sm font-medium">Филиал</label>
+          <select class="w-full border px-3 py-2 rounded">
+            <option>Центр</option>
+            <option>Северный</option>
+            <option>Южный</option>
+          </select>
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium">Дата и время</label>
+          <input type="datetime-local" class="w-full border px-3 py-2 rounded" />
+        </div>
+
+          <!-- Чекбокс согласия -->
+            <label class="flex items-start space-x-2 text-sm text-gray-600">
+                <input type="checkbox" id="consent" class="mt-1" />
+                <span>
+                Я соглашаюсь на <a href="#" class="text-blue-600 underline">обработку персональных данных</a>
+                в соответствии с законодательством.
+                </span>
+            </label>
+
+        <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Отправить</button>
+      </form>
+    </div>
+  </section>
+  
+  <!-- Подвал -->
+<footer class="bg-gray-700 text-white py-8">
+    <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-6 text-sm">
+      <div>
+        <h3 class="font-bold mb-2">О компании</h3>
+        <p class="text-gray-400">"Оптика 100%" — уфимская оптика предоставляющая качественные услуги в области офтальмологии. Диагностируем зрение, подбираем и изготавливаем очки, подбрираем и учим пользоваться контактными линзами. Широкий ассортмент оправ, линз и аксессуаров. Квалифицированные врачи-офтальмологи и оптометристы.</p>
+      </div>
+      <div>
+        <h3 class="font-bold mb-2">Контакты</h3>
+        <p class="text-gray-400">Тел: +7 (999) 123-45-67</p>
+        <p class="text-gray-400">Email: info@vision.ru</p>
+      </div>
+      <div>
+        <h3 class="font-bold mb-2">Режим работы</h3>
+        <p class="text-gray-400">Пн–Сб: 9:00 – 20:00</p>
+        <p class="text-gray-400">Вс: выходной</p>
+      </div>
+    </div>
+    <div class="text-center text-gray-500 mt-6 text-xs">© 2025 Оптика "100%". Все права защищены.</div>
+  </footer>
+  
+  </body>
+  </html>
+  
