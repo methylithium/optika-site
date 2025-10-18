@@ -26,14 +26,14 @@
         <img src="pic/logo.png" alt="Логотип" class="h-20 w-50">
       </div>
       <nav class="hidden md:flex space-x-6 items-center">
-        <a href="/" class="hover:text-red-800">Главная страница</a>
-        <a href="about.html" class="hover:text-red-800">О нас</a>
-        <a href="service.html" class="hover:text-red-800">Услуги</a>
-        <a href="contacts.html" class="hover:text-red-800">Адреса и контакты</a>
+        <a href="/" class="hover:text-red-600">Главная страница</a>
+        <a href="about.html" class="hover:text-red-600">О нас</a>
+        <a href="service.html" class="hover:text-red-600">Услуги</a>
+        <a href="contacts.html" class="hover:text-red-600">Адреса и контакты</a>
       </nav>
       <div class="hidden md:flex items-center space-x-4">
         <span class="text-sm">+7 (999) 123-45-67</span>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe7dq_6dSWPNoLT_zNFjfycW1o81JMqqTMrgDbnuFjMu_aoaA/viewform?usp=header" class="bg-red-800 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Записаться на прием</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe7dq_6dSWPNoLT_zNFjfycW1o81JMqqTMrgDbnuFjMu_aoaA/viewform?usp=header" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Записаться на прием</a>
       </div>
   
       <!-- Мобильное меню -->
@@ -46,65 +46,36 @@
       </button>
     </div>
     <div x-show="mobileMenuOpen" class="md:hidden bg-white shadow-md px-4 py-4 space-y-2">
-      <a href="about.html" class="block hover:text-red-800">О нас</a>
-      <a href="service.html" class="block hover:text-red-800">Услуги</a>
-      <a href="contacts.html" class="block hover:text-red-800">Адреса и контакты</a>
-      <a href="tel:79991314497" class="block text-red-800 font-semibold mt-2">+7 (999) 123-45-67</a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSe7dq_6dSWPNoLT_zNFjfycW1o81JMqqTMrgDbnuFjMu_aoaA/viewform?usp=header" class="block bg--red-800 text-white px-4 py-2 rounded hover:bg-red-900 text-center mt-2">Записаться на приём</a>
+      <a href="about.html" class="block hover:text-red-600">О нас</a>
+      <a href="service.html" class="block hover:text-red-600">Услуги</a>
+      <a href="contacts.html" class="block hover:text-red-600">Адреса и контакты</a>
+      <a href="tel:79991314497" class="block text-red-600 font-semibold mt-2">+7 (999) 123-45-67</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSe7dq_6dSWPNoLT_zNFjfycW1o81JMqqTMrgDbnuFjMu_aoaA/viewform?usp=header" class="block bg--red-600 text-white px-4 py-2 rounded hover:bg-red-900 text-center mt-2">Записаться на приём</a>
     </div>
   </header>
 
   <section class="py-16">
     <div class="max-w-6xl mx-auto px-4">
       <h1 class="text-3xl font-bold mb-10 text-center">Наши салоны</h1>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+      <div class="justify-center">
   
         <!-- Центр -->
-        <div class="bg-white rounded-lg shadow p-6 w-full max-w-md mx-auto" x-data="{ showMap: true }">
-          <h2 class="text-xl font-semibold mb-2">Салон в Центре</h2>
-          <p class="mb-1">ул. Ленина, 12</p>
-          <p class="mb-3">+7 (999) 123-45-67</p>
+        <div class="bg-white rounded-lg shadow p-6 w-full mx-auto" x-data="{ showMap: true }">
+          <h2 class="text-xl font-semibold mb-2">Адрес салона оптики "100%"</h2>
+          <p class="mb-1">г. Уфа, ул. Машиностроителей, д. 10</p>
+          <p class="mb-3">+7 (905) 004-25-85</p>
           <div class="mb-3">
             <button @click="showMap = true" :class="showMap ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'"
                     class="px-3 py-1 text-sm rounded-l">Карта</button>
             <button @click="showMap = false" :class="!showMap ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'"
                     class="px-3 py-1 text-sm rounded-r">Фото</button>
           </div>
-          <div class="map-tile" x-show="showMap" x-init="$nextTick(() => initMap('map1', 55.7558, 37.6173))" id="map1"></div>
+          <div class="map-tile" x-show="showMap" x-init="$nextTick(() => initMap('map1', 54.809116, 56.116193))" id="map1"></div>
           <img x-show="!showMap" src="https://via.placeholder.com/400x200?text=Центр" alt="Фото салона"
                class="rounded w-full h-52 object-cover" loading="lazy">
-        </div>
-  
-        <!-- Северный район -->
-        <div class="bg-white rounded-lg shadow p-6 w-full max-w-md mx-auto" x-data="{ showMap: true }">
-          <h2 class="text-xl font-semibold mb-2">Салон в Северном районе</h2>
-          <p class="mb-1">пр-т Мира, 101</p>
-          <p class="mb-3">+7 (999) 234-56-78</p>
-          <div class="mb-3">
-            <button @click="showMap = true" :class="showMap ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'"
-                    class="px-3 py-1 text-sm rounded-l">Карта</button>
-            <button @click="showMap = false" :class="!showMap ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'"
-                    class="px-3 py-1 text-sm rounded-r">Фото</button>
-          </div>
-          <div class="map-tile" x-show="showMap" x-init="$nextTick(() => initMap('map2', 55.8028, 37.6045))" id="map2"></div>
-          <img x-show="!showMap" src="https://via.placeholder.com/400x200?text=Северный" alt="Фото салона"
-               class="rounded w-full h-52 object-cover" loading="lazy">
-        </div>
-  
-        <!-- Южный район -->
-        <div class="bg-white rounded-lg shadow p-6 w-full max-w-md mx-auto" x-data="{ showMap: true }">
-          <h2 class="text-xl font-semibold mb-2">Салон в Южном районе</h2>
-          <p class="mb-1">ул. Победы, 45</p>
-          <p class="mb-3">+7 (999) 345-67-89</p>
-          <div class="mb-3">
-            <button @click="showMap = true" :class="showMap ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'"
-                    class="px-3 py-1 text-sm rounded-l">Карта</button>
-            <button @click="showMap = false" :class="!showMap ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'"
-                    class="px-3 py-1 text-sm rounded-r">Фото</button>
-          </div>
-          <div class="map-tile" x-show="showMap" x-init="$nextTick(() => initMap('map3', 55.6827, 37.5537))" id="map3"></div>
-          <img x-show="!showMap" src="https://via.placeholder.com/400x200?text=Южный" alt="Фото салона"
-               class="rounded w-full h-52 object-cover" loading="lazy">
+          <p class="mb-1"><a href="https://yandex.ru/maps/-/CLVcYQMl">Открыть в Яндекс.Картах</a></p>
+          <p class="mb-1"><a href="https://go.2gis.com/M7va5">Открыть в 2ГИС</a></p>
+          <p class="mb-1"><a href="https://maps.app.goo.gl/ZFvRdh43H3ziu1286">Открыть в Google Maps</a></p>
         </div>
   
       </div>
@@ -132,9 +103,9 @@
 </script>
 
 <!-- CTA -->
-<section class="py-16 bg-red-800 text-white text-center">
+<section class="py-16 bg-red-600 text-white text-center">
     <h2 class="text-2xl font-bold mb-4 animate__animated animate__pulse">Готовы увидеть мир чётче?</h2>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSe7dq_6dSWPNoLT_zNFjfycW1o81JMqqTMrgDbnuFjMu_aoaA/viewform?usp=header" class="inline-block bg-white text-red-800 px-6 py-3 rounded font-semibold hover:bg-gray-100 transition">Записаться на приём</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSe7dq_6dSWPNoLT_zNFjfycW1o81JMqqTMrgDbnuFjMu_aoaA/viewform?usp=header" class="inline-block bg-white text-red-600 px-6 py-3 rounded font-semibold hover:bg-gray-100 transition">Записаться на приём</a>
   </section>
 
 <!-- Подвал -->
@@ -146,13 +117,13 @@
       </div>
       <div>
         <h3 class="font-bold mb-2">Контакты</h3>
-        <p class="text-gray-400">Тел: +7 (999) 123-45-67</p>
+        <p class="text-gray-400">Тел: +7 (905) 004-25-85</p>
         <p class="text-gray-400">Email: info@vision.ru</p>
       </div>
       <div>
         <h3 class="font-bold mb-2">Режим работы</h3>
-        <p class="text-gray-400">Пн–Сб: 9:00 – 20:00</p>
-        <p class="text-gray-400">Вс: выходной</p>
+        <<p class="text-gray-400">Пн–Вс: 11:00 – 19:00</p>
+        <p class="text-gray-400">Без выходных и перерывов</p>
       </div>
     </div>
     <div class="text-center text-gray-500 mt-6 text-xs">© 2025 Оптика "100%". Все права защищены.</div>
