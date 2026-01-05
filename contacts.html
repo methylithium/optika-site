@@ -15,6 +15,10 @@
       border-radius: 0.5rem;
       overflow: hidden;
     }
+
+    .leaflet-container {
+      z-index: 0;
+    }
   </style>
 </head>
 <body class="bg-white text-gray-800">
@@ -60,7 +64,7 @@
       <div class="justify-center">
   
         <!-- Центр -->
-        <div class="bg-white rounded-lg shadow p-6 w-full mx-auto" x-data="{ showMap: true }">
+        <div class="bg-white rounded-lg shadow p-6 w-full mx-auto text-center" x-data="{ showMap: true }">
           <h2 class="text-xl font-semibold mb-2">Адрес салона оптики "100%"</h2>
           <p class="mb-1">г. Уфа, ул. Машиностроителей, д. 10</p>
           <p class="mb-3">+7 (905) 004-25-85</p>
@@ -71,6 +75,7 @@
                     class="px-3 py-1 text-sm rounded-r">Фото</button>
           </div>
           <div class="map-tile" x-show="showMap" x-init="$nextTick(() => initMap('map1', 54.809116, 56.116193))" id="map1"></div>
+          
           <img x-show="!showMap" src="pic/optic-photo.jpg" alt="Фото салона"
                class="rounded w-full h-[400px] object-cover" loading="lazy">
           <p class="mb-1"><a href="https://yandex.ru/maps/org/optika_100_/237387591458/">Открыть в Яндекс.Картах</a></p>
