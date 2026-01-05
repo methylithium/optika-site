@@ -1,6 +1,0 @@
---2025-05-02 17:09:47--  https://images.pexels.com/photos/1112203/pexels-photo-1112203.jpeg?auto=compress
-Resolving images.pexels.com (images.pexels.com)... 104.18.67.220, 104.18.66.220, 2606:4700::6812:42dc, ...
-Connecting to images.pexels.com (images.pexels.com)|104.18.67.220|:443... connected.
-HTTP request sent, awaiting response... 403 Forbidden
-2025-05-02 17:09:47 ERROR 403: Forbidden.
-
