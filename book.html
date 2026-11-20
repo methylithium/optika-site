@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script defer src="[https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js](https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js)"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="bg-white text-gray-800">
 
@@ -136,7 +136,7 @@
   const submitBtn = document.getElementById('submitBtn');
   const statusEl = document.getElementById('statusMessage');
 
-  // 1. Запрет выбора прошедшей даты (выставляем min = текущее локальное время)
+  // 1. Запрет выбора прошедшей даты
   function setMinDateTime() {
     const now = new Date();
     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
@@ -152,7 +152,6 @@
       return;
     }
 
-    // Если пользователь начал с 8 или 9 — приводим к 7
     if (digits[0] === '8') digits = '7' + digits.slice(1);
     if (digits[0] !== '7') digits = '7' + digits;
     digits = digits.slice(0, 11);
@@ -170,9 +169,14 @@
   datetimeInput.addEventListener('change', () => dateError.classList.add('hidden'));
   consentInput.addEventListener('change', () => consentError.classList.add('hidden'));
 
-  // 3. Валидация и отправка формы
+  // 3. Единый обработчик валидации и отправки
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
+
+    phoneError.classList.add('hidden');
+    dateError.classList.add('hidden');
+    consentError.classList.add('hidden');
+
     let isValid = true;
 
     // Проверка имени
@@ -188,11 +192,26 @@
       isValid = false;
     }
 
-    // Проверка даты (строго в будущем)
-    const selectedDate = new Date(datetimeInput.value);
-    if (!datetimeInput.value || isNaN(selectedDate) || selectedDate <= new Date()) {
+    // Проверка даты (будущее + рабочие часы 10:00–19:30)
+    const rawVal = datetimeInput.value;
+    if (!rawVal || !rawVal.includes('T')) {
+      dateError.innerText = 'Выберите дату и время';
       dateError.classList.remove('hidden');
       isValid = false;
+    } else {
+      const selectedDate = new Date(rawVal);
+      const [, timePart] = rawVal.split('T');
+      const [hours, minutes] = timePart.split(':').map(Number);
+
+      if (isNaN(selectedDate) || selectedDate <= new Date()) {
+        dateError.innerText = 'Выберите дату и время в будущем';
+        dateError.classList.remove('hidden');
+        isValid = false;
+      } else if (hours < 10 || hours > 19 || (hours === 19 && minutes > 30)) {
+        dateError.innerText = 'Мы работаем с 10:00 до 20:00 (последняя запись в 19:30)';
+        dateError.classList.remove('hidden');
+        isValid = false;
+      }
     }
 
     // Проверка согласия
@@ -237,72 +256,6 @@
       submitBtn.disabled = false;
       submitBtn.innerText = 'Записаться на приём';
       submitBtn.classList.remove('opacity-60', 'cursor-not-allowed');
-    }
-  });
-
-  // Проверка даты (будущее + рабочие часы 10:00–20:00)
-const selectedDate = new Date(datetimeInput.value);
-const now = new Date();
-
-if (!datetimeInput.value || isNaN(selectedDate) || selectedDate <= now) {
-  dateError.innerText = 'Выберите дату и время в будущем';
-  dateError.classList.remove('hidden');
-  isValid = false;
-} else {
-  const hours = selectedDate.getHours();
-  const minutes = selectedDate.getMinutes();
-  // Запрещаем раньше 10:00 и позже 19:30 (чтобы успеть принять до 20:00)
-  if (hours < 10 || hours > 19 || (hours === 19 && minutes > 30)) {
-    dateError.innerText = 'Мы работаем с 10:00 до 20:00 (последняя запись в 19:30)';
-    dateError.classList.remove('hidden');
-    isValid = false;
-  }
-}
-</script>
-
-<script>
-  document.getElementById('bookingForm').addEventListener('submit', async function(e) {
-    e.preventDefault(); 
-    
-    const btn = document.getElementById('submitBtn');
-    const statusEl = document.getElementById('statusMessage');
-    
-    // Меняем состояние кнопки
-    btn.disabled = true;
-    btn.innerText = 'Отправка...';
-    btn.classList.add('opacity-50');
-    
-    statusEl.className = 'mt-4 text-center text-sm text-gray-600 block';
-    statusEl.innerText = 'Связываемся с сервером...';
-    
-    const data = {
-      name: document.getElementById('name').value,
-      phone: document.getElementById('phone').value,
-      datetime: document.getElementById('datetime').value
-    };
-
-    try {
-      const response = await fetch('/api/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      
-      if (response.ok) {
-        statusEl.className = 'mt-4 text-center text-sm text-green-600 block font-bold';
-        statusEl.innerText = 'Заявка успешно отправлена! Мы скоро перезвоним.';
-        this.reset(); // Очищаем форму
-      } else {
-        throw new Error('Ошибка сервера');
-      }
-    } catch (error) {
-      statusEl.className = 'mt-4 text-center text-sm text-red-600 block font-bold';
-      statusEl.innerText = 'Произошла ошибка при отправке. Попробуйте позже.';
-    } finally {
-      // Возвращаем кнопку в исходное состояние
-      btn.disabled = false;
-      btn.innerText = 'Отправить';
-      btn.classList.remove('opacity-50');
     }
   });
 </script>
