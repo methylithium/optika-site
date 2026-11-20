@@ -7,11 +7,12 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script defer src="[https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js](https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js)"></script>
 </head>
 <body class="bg-white text-gray-800">
 
 <!-- Header -->
-<header class="shadow-md sticky top-0 bg-white z-50">
+<header x-data="{ mobileMenuOpen: false }" class="shadow-md sticky top-0 bg-white z-50">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center space-x-4">
         <img src="pic/logo.png" alt="Логотип" class="h-20 w-50">
@@ -46,44 +47,84 @@
   </header>
 
 <section class="py-16 bg-gray-50">
-    <div class="max-w-md mx-auto px-4 bg-white p-6 rounded shadow">
-      <h1 class="text-2xl font-bold mb-6 text-center">Запись на приём</h1>
-      <form class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium">Имя</label>
-          <input type="text" class="w-full border px-3 py-2 rounded" required />
-        </div>
-        <div>
-          <label class="block text-sm font-medium">Телефон</label>
-          <input type="tel" class="w-full border px-3 py-2 rounded" required />
-        </div>
-        <div>
-          <label class="block text-sm font-medium">Филиал</label>
-          <select class="w-full border px-3 py-2 rounded">
-            <option>Центр</option>
-            <option>Северный</option>
-            <option>Южный</option>
-          </select>
-        </div>
-        
-        <div>
-          <label class="block text-sm font-medium">Дата и время</label>
-          <input type="datetime-local" class="w-full border px-3 py-2 rounded" />
-        </div>
+  <div class="max-w-md mx-auto px-4 bg-white p-6 rounded shadow">
+    <h1 class="text-2xl font-bold mb-6 text-center">Запись на приём</h1>
+    
+    <form id="bookingForm" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium">Имя</label>
+        <input type="text" id="name" class="w-full border px-3 py-2 rounded" required />
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Телефон</label>
+        <input type="tel" id="phone" class="w-full border px-3 py-2 rounded" required />
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Дата и время</label>
+        <input type="datetime-local" id="datetime" class="w-full border px-3 py-2 rounded" required />
+      </div>
 
-          <!-- Чекбокс согласия -->
-            <label class="flex items-start space-x-2 text-sm text-gray-600">
-                <input type="checkbox" id="consent" class="mt-1" />
-                <span>
-                Я соглашаюсь на <a href="#" class="text-blue-600 underline">обработку персональных данных</a>
-                в соответствии с законодательством.
-                </span>
-            </label>
+      <!-- Чекбокс согласия -->
+      <label class="flex items-start space-x-2 text-sm text-gray-600">
+        <input type="checkbox" id="consent" class="mt-1" required />
+        <span>
+          Я соглашаюсь на <a href="#" class="text-blue-600 underline">обработку персональных данных</a>
+          в соответствии с законодательством.
+        </span>
+      </label>
 
-        <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Отправить</button>
-      </form>
-    </div>
-  </section>
+      <button type="submit" id="submitBtn" class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Отправить</button>
+      <p id="statusMessage" class="hidden mt-4 text-center text-sm font-medium"></p>
+    </form>
+  </div>
+</section>
+
+<script>
+  document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+    e.preventDefault(); 
+    
+    const btn = document.getElementById('submitBtn');
+    const statusEl = document.getElementById('statusMessage');
+    
+    // Меняем состояние кнопки
+    btn.disabled = true;
+    btn.innerText = 'Отправка...';
+    btn.classList.add('opacity-50');
+    
+    statusEl.className = 'mt-4 text-center text-sm text-gray-600 block';
+    statusEl.innerText = 'Связываемся с сервером...';
+    
+    const data = {
+      name: document.getElementById('name').value,
+      phone: document.getElementById('phone').value,
+      datetime: document.getElementById('datetime').value
+    };
+
+    try {
+      const response = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      
+      if (response.ok) {
+        statusEl.className = 'mt-4 text-center text-sm text-green-600 block font-bold';
+        statusEl.innerText = 'Заявка успешно отправлена! Мы скоро перезвоним.';
+        this.reset(); // Очищаем форму
+      } else {
+        throw new Error('Ошибка сервера');
+      }
+    } catch (error) {
+      statusEl.className = 'mt-4 text-center text-sm text-red-600 block font-bold';
+      statusEl.innerText = 'Произошла ошибка при отправке. Попробуйте позже.';
+    } finally {
+      // Возвращаем кнопку в исходное состояние
+      btn.disabled = false;
+      btn.innerText = 'Отправить';
+      btn.classList.remove('opacity-50');
+    }
+  });
+</script>
   
   <!-- Подвал -->
 <footer class="bg-gray-700 text-white py-8">
