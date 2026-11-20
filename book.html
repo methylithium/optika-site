@@ -239,6 +239,25 @@
       submitBtn.classList.remove('opacity-60', 'cursor-not-allowed');
     }
   });
+
+  // Проверка даты (будущее + рабочие часы 10:00–20:00)
+const selectedDate = new Date(datetimeInput.value);
+const now = new Date();
+
+if (!datetimeInput.value || isNaN(selectedDate) || selectedDate <= now) {
+  dateError.innerText = 'Выберите дату и время в будущем';
+  dateError.classList.remove('hidden');
+  isValid = false;
+} else {
+  const hours = selectedDate.getHours();
+  const minutes = selectedDate.getMinutes();
+  // Запрещаем раньше 10:00 и позже 19:30 (чтобы успеть принять до 20:00)
+  if (hours < 10 || hours > 19 || (hours === 19 && minutes > 30)) {
+    dateError.innerText = 'Мы работаем с 10:00 до 20:00 (последняя запись в 19:30)';
+    dateError.classList.remove('hidden');
+    isValid = false;
+  }
+}
 </script>
 
 <script>
