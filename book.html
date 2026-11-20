@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Адреса и контакты - Оптика 100% Уфа</title>
+  <title>Запись на приём - Оптика 100% Уфа</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -13,44 +13,45 @@
 
 <!-- Header -->
 <header x-data="{ mobileMenuOpen: false }" class="shadow-md sticky top-0 bg-white z-50">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-      <div class="flex items-center space-x-4">
-        <img src="pic/logo.png" alt="Логотип" class="h-20 w-50">
-      </div>
-      <nav class="hidden md:flex space-x-6 items-center">
-        <a href="/" class="hover:text-red-600">Главная страница</a>
-        <a href="about.html" class="hover:text-red-600">О нас</a>
-        <a href="service.html" class="hover:text-red-600">Услуги</a>
-        <a href="contacts.html" class="hover:text-red-600">Адреса и контакты</a>
-      </nav>
-      <div class="hidden md:flex items-center space-x-4">
-        <span class="text-sm">+7 (905) 004-25-85</span>
-        <a href="#" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Записаться на прием</a>
-      </div>
-  
-      <!-- Мобильное меню -->
-      <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-             viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
-      </button>
+  <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+    <div class="flex items-center space-x-4">
+      <img src="pic/logo.png" alt="Логотип" class="h-20 w-50">
     </div>
-    <div x-show="mobileMenuOpen" class="md:hidden bg-white shadow-md px-4 py-4 space-y-2">
-      <a href="about.html" class="block hover:text-red-600">О нас</a>
-      <a href="service.html" class="block hover:text-red-600">Услуги</a>
-      <a href="contacts.html" class="block hover:text-red-600">Адреса и контакты</a>
-      <a href="tel:79991314497" class="block text-red-600 font-semibold mt-2">+7 (905) 004-25-85</a>
-      <a href="#" class="block bg--red-600 text-white px-4 py-2 rounded hover:bg-red-900 text-center mt-2">Записаться на приём</a>
+    <nav class="hidden md:flex space-x-6 items-center">
+      <a href="/" class="hover:text-red-600">Главная страница</a>
+      <a href="about.html" class="hover:text-red-600">О нас</a>
+      <a href="service.html" class="hover:text-red-600">Услуги</a>
+      <a href="contacts.html" class="hover:text-red-600">Адреса и контакты</a>
+    </nav>
+    <div class="hidden md:flex items-center space-x-4">
+      <span class="text-sm">+7 (905) 004-25-85</span>
+      <a href="#bookingForm" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">Записаться на приём</a>
     </div>
-  </header>
 
+    <!-- Мобильное меню -->
+    <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+           viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+  <div x-show="mobileMenuOpen" class="md:hidden bg-white shadow-md px-4 py-4 space-y-2">
+    <a href="about.html" class="block hover:text-red-600">О нас</a>
+    <a href="service.html" class="block hover:text-red-600">Услуги</a>
+    <a href="contacts.html" class="block hover:text-red-600">Адреса и контакты</a>
+    <a href="tel:+79050042585" class="block text-red-600 font-semibold mt-2">+7 (905) 004-25-85</a>
+    <a href="#bookingForm" class="block bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 text-center mt-2">Записаться на приём</a>
+  </div>
+</header>
+
+<!-- Форма записи -->
 <section class="py-16 bg-gray-50 px-4">
   <div class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
     <div class="text-center mb-8">
       <h1 class="text-2xl font-bold text-gray-900">Запись на приём</h1>
-      <p class="text-sm text-gray-500 mt-1">Оставьте контакты, и мы подтвердим время визита</p>
+      <p class="text-sm text-gray-500 mt-1">Выберите удобный день и свободное время</p>
     </div>
 
     <form id="bookingForm" class="space-y-5" novalidate>
@@ -64,9 +65,10 @@
           class="w-full border border-gray-300 px-4 py-2.5 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition"
           required
         />
+        <p id="nameError" class="hidden text-xs text-red-600 mt-1">Введите ваше имя</p>
       </div>
 
-      <!-- Телефон с маской -->
+      <!-- Телефон -->
       <div>
         <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Телефон</label>
         <input
@@ -79,19 +81,29 @@
         <p id="phoneError" class="hidden text-xs text-red-600 mt-1">Введите корректный номер из 11 цифр</p>
       </div>
 
-      <!-- Дата и время -->
+      <!-- Выбор даты -->
       <div>
-        <label for="datetime" class="block text-sm font-medium text-gray-700 mb-1">Желаемая дата и время</label>
+        <label for="date" class="block text-sm font-medium text-gray-700 mb-1">Дата визита</label>
         <input
-          type="datetime-local"
-          id="datetime"
+          type="date"
+          id="date"
           class="w-full border border-gray-300 px-4 py-2.5 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition"
           required
         />
-        <p id="dateError" class="hidden text-xs text-red-600 mt-1">Выберите дату и время в будущем</p>
+        <p id="dateError" class="hidden text-xs text-red-600 mt-1">Выберите дату визита</p>
       </div>
 
-      <!-- Чекбокс согласия -->
+      <!-- Свободные часы -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Свободное время</label>
+        <div id="slotsContainer" class="grid grid-cols-3 gap-2">
+          <p class="col-span-3 text-sm text-gray-400">Сначала выберите дату</p>
+        </div>
+        <input type="hidden" id="selectedTime" />
+        <p id="timeError" class="hidden text-xs text-red-600 mt-1">Выберите свободное время</p>
+      </div>
+
+      <!-- Согласие -->
       <div>
         <label class="flex items-start space-x-3 text-xs text-gray-600 cursor-pointer">
           <input
@@ -127,31 +139,30 @@
   const form = document.getElementById('bookingForm');
   const nameInput = document.getElementById('name');
   const phoneInput = document.getElementById('phone');
-  const datetimeInput = document.getElementById('datetime');
+  const dateInput = document.getElementById('date');
+  const slotsContainer = document.getElementById('slotsContainer');
+  const selectedTimeInput = document.getElementById('selectedTime');
   const consentInput = document.getElementById('consent');
 
+  const nameError = document.getElementById('nameError');
   const phoneError = document.getElementById('phoneError');
   const dateError = document.getElementById('dateError');
+  const timeError = document.getElementById('timeError');
   const consentError = document.getElementById('consentError');
   const submitBtn = document.getElementById('submitBtn');
   const statusEl = document.getElementById('statusMessage');
 
-  // 1. Запрет выбора прошедшей даты
-  function setMinDateTime() {
-    const now = new Date();
-    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-    datetimeInput.min = now.toISOString().slice(0, 16);
-  }
-  setMinDateTime();
+  // 1. Запрет выбора прошедших дней
+  const today = new Date();
+  const todayStr = new Date(today.getTime() - today.getTimezoneOffset() * 60000)
+    .toISOString()
+    .split('T')[0];
+  dateInput.min = todayStr;
 
-  // 2. Маска ввода телефона: +7 (999) 123-45-67
+  // 2. Маска телефона: +7 (999) 123-45-67
   phoneInput.addEventListener('input', function (e) {
     let digits = e.target.value.replace(/\D/g, '');
-    if (!digits) {
-      e.target.value = '';
-      return;
-    }
-
+    if (!digits) { e.target.value = ''; return; }
     if (digits[0] === '8') digits = '7' + digits.slice(1);
     if (digits[0] !== '7') digits = '7' + digits;
     digits = digits.slice(0, 11);
@@ -166,55 +177,87 @@
     phoneError.classList.add('hidden');
   });
 
-  datetimeInput.addEventListener('change', () => dateError.classList.add('hidden'));
+  nameInput.addEventListener('input', () => nameError.classList.add('hidden'));
   consentInput.addEventListener('change', () => consentError.classList.add('hidden'));
 
-  // 3. Единый обработчик валидации и отправки
+  // 3. Загрузка свободных часов из Neon
+  async function loadSlots(dateStr) {
+    selectedTimeInput.value = '';
+    dateError.classList.add('hidden');
+    timeError.classList.add('hidden');
+    slotsContainer.innerHTML = '<p class="col-span-3 text-sm text-gray-500">Загружаем свободные часы...</p>';
+
+    try {
+      const res = await fetch(`/api/slots?date=${encodeURIComponent(dateStr)}`);
+      if (!res.ok) throw new Error('Ошибка сервера');
+      const data = await res.json();
+      let available = data.available || [];
+
+      // Если выбрано сегодня — убираем часы, которые уже прошли
+      if (dateStr === todayStr) {
+        const currentHour = new Date().getHours();
+        available = available.filter(slot => parseInt(slot.split(':')[0], 10) > currentHour);
+      }
+
+      if (available.length === 0) {
+        slotsContainer.innerHTML = '<p class="col-span-3 text-sm text-red-600">На эту дату свободных мест нет. Выберите другой день.</p>';
+        return;
+      }
+
+      slotsContainer.innerHTML = '';
+      available.forEach(slot => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.innerText = slot;
+        btn.className = 'slot-btn py-2 px-3 text-sm font-medium border border-gray-300 rounded-lg hover:border-red-500 hover:text-red-600 transition';
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.slot-btn').forEach(b => {
+            b.classList.remove('bg-red-600', 'text-white', 'border-red-600');
+            b.classList.add('border-gray-300');
+          });
+          btn.classList.remove('border-gray-300');
+          btn.classList.add('bg-red-600', 'text-white', 'border-red-600');
+          selectedTimeInput.value = slot;
+          timeError.classList.add('hidden');
+        });
+        slotsContainer.appendChild(btn);
+      });
+    } catch (err) {
+      slotsContainer.innerHTML = '<p class="col-span-3 text-sm text-red-600">Ошибка загрузки расписания. Попробуйте позже.</p>';
+    }
+  }
+
+  dateInput.addEventListener('change', (e) => {
+    if (e.target.value) loadSlots(e.target.value);
+  });
+
+  // 4. Валидация и отправка формы
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
 
+    nameError.classList.add('hidden');
     phoneError.classList.add('hidden');
     dateError.classList.add('hidden');
+    timeError.classList.add('hidden');
     consentError.classList.add('hidden');
 
     let isValid = true;
 
-    // Проверка имени
     if (!nameInput.value.trim()) {
-      nameInput.focus();
+      nameError.classList.remove('hidden');
       isValid = false;
     }
-
-    // Проверка телефона (ровно 11 цифр)
-    const cleanPhone = phoneInput.value.replace(/\D/g, '');
-    if (cleanPhone.length !== 11) {
+    if (phoneInput.value.replace(/\D/g, '').length !== 11) {
       phoneError.classList.remove('hidden');
       isValid = false;
     }
-
-    // Проверка даты (будущее + рабочие часы 10:00–19:30)
-    const rawVal = datetimeInput.value;
-    if (!rawVal || !rawVal.includes('T')) {
-      dateError.innerText = 'Выберите дату и время';
+    if (!dateInput.value) {
       dateError.classList.remove('hidden');
       isValid = false;
-    } else {
-      const selectedDate = new Date(rawVal);
-      const [, timePart] = rawVal.split('T');
-      const [hours, minutes] = timePart.split(':').map(Number);
-
-      if (isNaN(selectedDate) || selectedDate <= new Date()) {
-        dateError.innerText = 'Выберите дату и время в будущем';
-        dateError.classList.remove('hidden');
-        isValid = false;
-      } else if (hours < 10 || hours > 19 || (hours === 19 && minutes > 30)) {
-        dateError.innerText = 'Мы работаем с 10:00 до 20:00 (последняя запись в 19:30)';
-        dateError.classList.remove('hidden');
-        isValid = false;
-      }
+    } else if (!selectedTimeInput.value) {
+      timeError.classList.remove('hidden');
+      isValid = false;
     }
-
-    // Проверка согласия
     if (!consentInput.checked) {
       consentError.classList.remove('hidden');
       isValid = false;
@@ -222,13 +265,11 @@
 
     if (!isValid) return;
 
-    // Отправка на сервер
     submitBtn.disabled = true;
     submitBtn.innerText = 'Отправка...';
     submitBtn.classList.add('opacity-60', 'cursor-not-allowed');
-
     statusEl.className = 'p-3 rounded-lg text-center text-sm font-medium bg-gray-100 text-gray-600 block';
-    statusEl.innerText = 'Отправляем заявку...';
+    statusEl.innerText = 'Бронируем время...';
 
     try {
       const response = await fetch('/api/submit', {
@@ -237,15 +278,23 @@
         body: JSON.stringify({
           name: nameInput.value.trim(),
           phone: phoneInput.value,
-          datetime: datetimeInput.value
+          date: dateInput.value,
+          time: selectedTimeInput.value
         })
       });
 
       if (response.ok) {
+        const bookedDate = dateInput.value;
+        const bookedTime = selectedTimeInput.value;
         statusEl.className = 'p-3 rounded-lg text-center text-sm font-medium bg-green-50 text-green-700 border border-green-200 block';
-        statusEl.innerText = 'Заявка принята! Администратор скоро свяжется с вами.';
+        statusEl.innerText = `Вы записаны на ${bookedDate} в ${bookedTime}!`;
         form.reset();
-        setMinDateTime();
+        dateInput.value = bookedDate;
+        loadSlots(bookedDate);
+      } else if (response.status === 409) {
+        statusEl.className = 'p-3 rounded-lg text-center text-sm font-medium bg-yellow-50 text-yellow-800 border border-yellow-200 block';
+        statusEl.innerText = 'Это время только что заняли. Выберите другой час.';
+        loadSlots(dateInput.value);
       } else {
         throw new Error('Ошибка сервера');
       }
@@ -259,28 +308,27 @@
     }
   });
 </script>
-  
-  <!-- Подвал -->
+
+<!-- Подвал -->
 <footer class="bg-gray-700 text-white py-8">
-    <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-6 text-sm">
-      <div>
-        <h3 class="font-bold mb-2">О компании</h3>
-        <p class="text-gray-400">"Оптика 100%" — уфимская оптика предоставляющая качественные услуги в области офтальмологии. Диагностируем зрение, подбираем и изготавливаем очки, подбрираем и учим пользоваться контактными линзами. Широкий ассортмент оправ, линз и аксессуаров. Квалифицированные врачи-офтальмологи и оптометристы.</p>
-      </div>
-      <div>
-        <h3 class="font-bold mb-2">Контакты</h3>
-        <p class="text-gray-400">Тел: +7 (905) 004-25-85</p>
-        <p class="text-gray-400">г. Уфа, ул. Машиностроителей, д. 10</p>
-      </div>
-      <div>
-        <h3 class="font-bold mb-2">Режим работы</h3>
-        <p class="text-gray-400">Пн–Вс: 10:00 – 20:00</p>
-        <p class="text-gray-400">Без выходных и перерывов</p>
-      </div>
+  <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-6 text-sm">
+    <div>
+      <h3 class="font-bold mb-2">О компании</h3>
+      <p class="text-gray-400">"Оптика 100%" — уфимская оптика предоставляющая качественные услуги в области офтальмологии. Диагностируем зрение, подбираем и изготавливаем очки, подбираем и учим пользоваться контактными линзами. Широкий ассортимент оправ, линз и аксессуаров. Квалифицированные врачи-офтальмологи и оптометристы.</p>
     </div>
-    <div class="text-center text-gray-500 mt-6 text-xs">© 2025 Оптика "100%". Все права защищены.</div>
-  </footer>
-  
-  </body>
-  </html>
-  
+    <div>
+      <h3 class="font-bold mb-2">Контакты</h3>
+      <p class="text-gray-400">Тел: +7 (905) 004-25-85</p>
+      <p class="text-gray-400">г. Уфа, ул. Машиностроителей, д. 10</p>
+    </div>
+    <div>
+      <h3 class="font-bold mb-2">Режим работы</h3>
+      <p class="text-gray-400">Пн–Вс: 10:00 – 20:00</p>
+      <p class="text-gray-400">Без выходных и перерывов</p>
+    </div>
+  </div>
+  <div class="text-center text-gray-500 mt-6 text-xs">© 2025 Оптика "100%". Все права защищены.</div>
+</footer>
+
+</body>
+</html>
